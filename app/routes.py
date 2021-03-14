@@ -82,13 +82,13 @@ def messaged():
                 enterList.append(historyArr['enter_time'][i])
                 exitList.append(historyArr['exit_time'][i])
 
-        # for i in range(len(messageList)):
-            # message = client.messages \
-            #     .create(
-            #          body=f"You have been in contact with someone that has tested positive for COVID-19. Please make sure to get tested and self quarantine. During your stay at {restaurantName} from {enterList[i]} to {exitList[i]}.",
-            #          from_='+14139923391',
-            #          to=f'+1{messageList[i]}'
-            #      )
+        for i in range(len(messageList)):
+            message = client.messages \
+                .create(
+                     body=f"You have been in contact with someone that has tested positive for COVID-19. Please make sure to get tested and self quarantine. During your stay at {restaurantName} from {enterList[i]} to {exitList[i]}.",
+                     from_='+14139923391',
+                     to=f'+1{messageList[i]}'
+                 )
 
         # return str(messageList)
         return render_template("info.html", messageList = messageList, enterList = enterList, exitList = exitList, arrLen = len(messageList), messaged=True)
