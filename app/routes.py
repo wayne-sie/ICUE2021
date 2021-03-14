@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, redirect
+from flask import render_template, redirect, request
 from pymongo import MongoClient
 from flask import request
 import datetime
@@ -7,10 +7,12 @@ import datetime
 
 
 @app.route("/")
-@app.route("/index", methods=['GET', 'POST'])
+@app.route("/index")
 def index():
     if request.method == 'POST':
-        return redirect(url_for('messaged'))
+        x = str(request.form.getlist('checked'))
+        return x
+        # return redirect(url_for('messaged'))
     else:
         cluster = MongoClient('mongodb+srv://sanjeev2001:mEm39dShwBgbf2@cluster0.w43vk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
         db = cluster["customer"]
@@ -32,15 +34,28 @@ def index():
 
         return render_template("index.html", historyArr = historyArr, arrLen = len(historyArr['rfid']))
 
-# @app.route("/messaged")
-# def messaged():
+@app.route("/messaged", methods=['GET', 'POST'])
+def messaged():
+    if request.method == 'POST':
+        # account_sid = os.environ['ACc40d883d6878ff32d457ab4c0d38216c']
+        # auth_token = os.environ['b3130d8ddd38c115d9cf4990b5468e38']
+        # client = Client(account_sid, auth_token)
 
-#     cluster = MongoClient('mongodb+srv://sanjeev2001:mEm39dShwBgbf2@cluster0.w43vk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-#     history = db["history"]
-#     query = {'rfid': ""}
-#     infectedPerson = history.find_one()
-#     for i in range(len(history['rfid'])):
-#         if history['enter_time'] < 
+        rfidOfInfected = str(request.form.getlist('checked'))
+
+        cluster = MongoClient('mongodb+srv://sanjeev2001:mEm39dShwBgbf2@cluster0.w43vk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+        db = cluster["customer"]
+        history = db["history"]
+        query = {'rfid': rfidOfInfected}
+        infectedPerson = history.find_one(query)
+        for i in range(len(history['rfid'])):
+            historyTime = datetime.datetime.striptime(history['enter_time'], '%d-%m-%y %H:%M:%S')
+            infectedTime = datetime.datetime.striptime(infected['enter_time'], '%d-%m-%y %H:%M:%S')
+            if historyTime > infectedTime:
+                return "True"
+
+    else: 
+        return "Error 404 not found"
 
 
 @app.route("/input")

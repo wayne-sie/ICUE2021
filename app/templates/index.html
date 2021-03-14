@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container-fluid text-center top-container">
-        <form action="{{ url_for('index') }}" method="POST">
+        <form action="{{ url_for('messaged') }}" method="POST">
             
             <table style="width:100%">
                 <tr>
@@ -29,7 +29,7 @@
                         <td>{{ historyArr['phone_num'][count] }}</td>
                         <td>{{ historyArr['enter_time'][count] }}</dt>
                         <td>{{ historyArr['exit_time'][count] }}</td>
-                        <td><input type="checkbox" id="{{ historyArr['rfid'][count] }}"></td>
+                        <td><input type="checkbox" name="checked" value="{{ historyArr['rfid'][count] }}"></td>
                     </tr>
                 {% endfor %}
                 
