@@ -1,0 +1,30 @@
+
+<form action="{{ url_for('messaged') }}" method="POST">
+        
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Phone Number</td>
+                <td>Enter Time</dt>
+                <td>Exit Time</td>
+                <td>Has Covid-19</td>
+            </tr>
+            
+            {% for count in range(arrLen) %}
+                <tr>
+                    <td>{{ historyArr['rfid'][count] }}</td>
+                    <td>{{ historyArr['phone_num'][count] }}</td>
+                    <td>{{ historyArr['enter_time'][count] }}</td>
+                    <td>{{ historyArr['exit_time'][count] }}</td>
+                    <td><input type="checkbox" name="checked" value="{{ historyArr['rfid'][count] }}"></td>
+                </tr>
+            {% endfor %}
+            
+            <br>
+        </thead>
+
+    </table>
+
+    <input type="submit" value="Update">
+</form>

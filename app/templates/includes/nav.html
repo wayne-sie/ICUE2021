@@ -1,0 +1,15 @@
+<header>
+    <nav>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+            <a class="nav-link {% if index %}active{% endif %}" aria-current="page" href="{{ url_for('index') }}">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link {% if messaged %}active{% endif %}" href="{{ url_for('messaged') }}">Info</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+            </li>
+        </ul>
+    </nav>
+</header>

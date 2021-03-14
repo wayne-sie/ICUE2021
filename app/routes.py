@@ -6,7 +6,7 @@ import datetime
 import os
 from twilio.rest import Client
 
-restaurantName = "Starbucks"
+restaurantName = "Moms and Pops"
 
 @app.route("/")
 @app.route("/index")
@@ -34,11 +34,14 @@ def index():
             historyArr['exit_time'].append(document['exit_time'])
             historyArr['is_infected'].append(document['is_infected'])
 
-        return render_template("index.html", historyArr = historyArr, arrLen = len(historyArr['rfid']))
+        return render_template("index.html", historyArr = historyArr, arrLen = len(historyArr['rfid']), index=True)
 
 @app.route("/messaged", methods=['GET', 'POST'])
 def messaged():
     if request.method == 'POST':
+        account_sid = 'ACc40d883d6878ff32d457ab4c0d38216c'
+        auth_token = 'b3130d8ddd38c115d9cf4990b5468e38'
+        client = Client(account_sid, auth_token)
 
         rfidOfInfected = request.form.getlist('checked')
 
@@ -79,7 +82,7 @@ def messaged():
                 enterList.append(historyArr['enter_time'][i])
                 exitList.append(historyArr['exit_time'][i])
 
-        for i in range(len(messageList)):
+        # for i in range(len(messageList)):
             # message = client.messages \
             #     .create(
             #          body=f"You have been in contact with someone that has tested positive for COVID-19. Please make sure to get tested and self quarantine. During your stay at {restaurantName} from {enterList[i]} to {exitList[i]}.",
@@ -88,7 +91,7 @@ def messaged():
             #      )
 
         # return str(messageList)
-        return render_template()
+        return render_template("info.html", messageList = messageList, enterList = enterList, exitList = exitList, arrLen = len(messageList), messaged=True)
 
     else: 
         return "Error 404 not found"
