@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Covid Tracking App</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="static/css/style.css"/>
-</head>
-<body>
-    <div class ="container-fluid text-center top-container">
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/style.css" />
+  </head>
+  <body>
+    <div class="container-fluid text-center top-container">
+        <form action="{{ url_for('index') }}" method="POST">
+            
+            <table style="width:100%">
+                <tr>
+                    <td>ID:</td>
+                    <td>Phone Number:</td>
+                    <td>Enter Time:</dt>
+                    <td>Exit Time:</td>
+                    <td>Has Covid-19</td>
+                </tr>
+                
+                {% for count in range(arrLen) %}
+                    <tr>
+                        <td>{{ historyArr['rfid'][count] }}</td>
+                        <td>{{ historyArr['phone_num'][count] }}</td>
+                        <td>{{ historyArr['enter_time'][count] }}</dt>
+                        <td>{{ historyArr['exit_time'][count] }}</td>
+                        <td><input type="checkbox" id="{{ historyArr['rfid'][count] }}"></td>
+                    </tr>
+                {% endfor %}
+                
+                <br>
+            </table>
 
-        
-        <dl>
-            <dt>Name: {{ id }}</dt>
-            <dt>Phone Number: {{ num }}</dt>
-            <!-- <dt>Enter Time: {{ enter }}</dt>
-            <dt>Exit Time: {{ exit }}</dt> -->
-        </dl>
+            <input type="submit" value="Update">
+        </form>
     </div>
 
-    <div class="container">
-        
-    </div>
-    
-</body>
+    <div class="container"></div>
+  </body>
 </html>
