@@ -7,3 +7,6 @@ As customers enters the restaurant, they will scan their phones which have built
 Data Handling
 
 The webserver will list the customer information from the database. When the owner is made aware of a potential COVID outbreak in the restaurant, they can send a POST request to update the infected customer field. Once updated, the webserver will automatically determine customers who have been in the restaurant during a specific timeframe in which an individual who tested positive was present. These potentially affected customers will be added to a seperate collection of data, and will be immediately notified via an automated Twilio text messaging service.
+
+Written with
+Python, Flask, Jinja, HTML, CSS
