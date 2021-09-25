@@ -1,4 +1,4 @@
-# ICUE2021
+# ICUE2021 Covid-Phone-Tracker
 
 How It Works
 
@@ -10,3 +10,6 @@ The webserver will list the customer information from the database. When the own
 
 Written with
 Python, Flask, Jinja, HTML, CSS
+
+![ICUE-covid-phone-tracker](https://user-images.githubusercontent.com/60293949/134754264-f8b3d40f-5742-41cc-aead-8f783e59eced.gif)
+)
